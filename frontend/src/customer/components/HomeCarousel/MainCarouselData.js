@@ -1,14 +1,14 @@
 export const MainCarouselData=[
     {
-        image:"https://scontent-bom1-1.xx.fbcdn.net/v/t39.30808-6/236458556_4216803245095574_2630418252127081877_n.png?_nc_cat=103&ccb=1-7&_nc_sid=300f58&_nc_ohc=sA1Dok5qQE8AX_k2f54&_nc_ht=scontent-bom1-1.xx&oh=00_AfCk523Ua8iO1iHZ4znOehc3AhdZWcqj19Sefb_g90-K6Q&oe=64DFCC7D",
+        image:"./vivo.jpg",
         path:"/buyphone/brands/Apple"
     },
     {
-        image:"https://s3n.cashify.in/cashify/web/28ea1bfd462c40fe9b49c3e743fd65ab.webp",
+        image:"./oppo.jpg",
         path:"/buyphone/brands/Samsung"
     },
     {
-        image:"https://s3n.cashify.in/cashify/web/2d59ff2284ca4343a71351b17b51b078.webp",
+        image:"./realme.jpg",
         path:"/buyphone/brands/OnePlus"
     },
     {
