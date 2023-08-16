@@ -1,7 +1,10 @@
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useNavigate } from 'react-router-dom'
+import { Avatar, Button, Menu, MenuItem } from '@mui/material'
+import { deepPurple } from '@mui/material/colors'
 
 const navigation = {
   categories: [
@@ -27,26 +30,26 @@ const navigation = {
             id: 'brands',
             name: 'Brands',
             items: [
-              { name: 'Apple', href: '#' },
-              { name: 'Samsung', href: '#' },
-              { name: 'OnePlus', href: '#' },
-              { name: 'Mi', href: '#' },
-              { name: 'Realme', href: '#' },
-              { name: 'Poco', href: '#' },
-              { name: 'Vivo', href: '#' },
-              { name: 'Oppo', href: '#' },
-              { name: 'Google', href: '#' },
-              { name: 'Honor', href: '#' },
-              { name: 'Motorola', href: '#' },
+              { name: 'Apple', id:"apple" },
+              { name: 'Samsung', id:"samsung" },
+              { name: 'OnePlus', id:"oneplus" },
+              { name: 'Mi', id:"mi" },
+              { name: 'Realme', id:"realme" },
+              { name: 'Poco', id:"poco" },
+              { name: 'Vivo', id:"vivo" },
+              { name: 'Oppo', id:"oppo" },
+              { name: 'Google', id:"google" },
+              { name: 'Honor', id:"honor" },
+              { name: 'Motorola', id:"motorola" },
             ],
           },
         {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Charger', href: '#' },
-            { name: 'Earphone', href: '#' },
-            { name: 'BackCover', href: '#' },
+            { name: 'Charger', id:"charger" },
+            { name: 'Earphone', id:"earphone" },
+            { name: 'BackCover', id:"backcover" },
             
           ],
         },
@@ -56,8 +59,8 @@ const navigation = {
     
   ],
   pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
+    { name: 'Company', id:"company" },
+    { name: 'Stores', id:"stores" },
   ],
 }
 
@@ -66,7 +69,34 @@ function classNames(...classes) {
 }
 
 export default function Navigation() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const navigate=useNavigate();
+
+  const [openAuthModal, setOpenAuthModel] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openUserMenu = Boolean(anchorEl);
+  const jwt = localStorage.getItem("jwt");
+
+  const handleUserClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
+
+  const handleCloseUserMenu = (event) => {
+    setAnchorEl(null);
+  }
+
+  const handleOpen = () => {
+    setOpenAuthModel(true);
+  }
+
+  const handleClose = () => {
+    setOpenAuthModel(false);
+  }
+
+  const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.id}`);
+    close();
+  }
 
   return (
     <div className="bg-white ">
@@ -85,7 +115,7 @@ export default function Navigation() {
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 z-40 flex">
+          <div className="fixed inset-0 z-40 flex"> 
             <Transition.Child
               as={Fragment}
               enter="transition ease-in-out duration-300 transform"
@@ -299,9 +329,25 @@ export default function Navigation() {
                                           >
                                             {section.items.map((item) => (
                                               <li key={item.name} className="flex">
-                                                <a href={item.href} className="hover:text-gray-800">
+
+                                                {/* <a href={item.href} className="hover:text-gray-800">
                                                   {item.name}
-                                                </a>
+                                                </a> */}
+
+                                                <p 
+                                                  onClick={()=>
+                                                    handleCategoryClick(
+                                                      category,
+                                                      section,
+                                                      item,
+                                                      close
+                                                    )
+                                                  }
+                                                  className='cursor-pointer hover:text-gray-800'
+                                                >
+                                                  {item.name}
+                                                </p>
+
                                               </li>
                                             ))}
                                           </ul>
@@ -332,9 +378,55 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+
+                  {/* <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Sign in
-                  </a>
+                  </a> */}
+
+                  {true ? (
+                    <div>
+                      <Avatar
+                        className='text-white'
+                        onClick={handleUserClick}
+                        aria-controls={open ? "basic-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        // onClick={handleUserClick}
+                        sx={{
+                          bgcolor: deepPurple[500],
+                          color: "white",
+                          cursor: "pointer",
+                        }}
+                      >R
+                      </Avatar>
+                      <Menu
+                        id='basic-menu'
+                        anchorEl={anchorEl}
+                        open={openUserMenu}
+                        onClose={handleCloseUserMenu}
+                        MenuListProps={{
+                          "aria-labelledby": "basic-button",
+                        }}
+                      >
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          Profile
+                        </MenuItem>
+
+                        <MenuItem onClick={()=>navigate("/account/order")}>
+                          My Orders
+                        </MenuItem>
+                        <MenuItem >Logout</MenuItem>
+                      </Menu>
+                      </div>
+                  ) : (
+                    <Button
+                      onClick={handleOpen}
+                      className='text-sm font-medium text-gray-700 hover:text-gray-800'
+                    >
+                      Signin
+                    </Button>
+                  )}
+
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
@@ -351,16 +443,16 @@ export default function Navigation() {
                   </a>
                 </div>
 
-                {/* Cart */}
+                {/* Cart */} 
                 <div className="ml-4 flow-root lg:ml-6">
-                  <a href="#" className="group -m-2 flex items-center p-2">
+                  <Button className="group -m-2 flex items-center p-2">
                     <ShoppingBagIcon
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </a>
+                  </Button>
                 </div>
               </div>
             </div>
