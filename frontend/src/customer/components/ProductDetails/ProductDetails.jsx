@@ -3,6 +3,8 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
+import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
+import { smartphones } from "../../../Data/smartphones";
 
 const product = {
   name: "Apple iPhone 11 - Refurbished",
@@ -347,7 +349,7 @@ export default function ProductDetails() {
                   <Rating value={4.6} precision={0.5} readOnly />
                   <p className="opacity-60">548 Ratings</p>
                 </div>
-                <Box className="mt-5 space-y-3" >
+                <Box className="mt-5 space-y-3">
                   <Grid container alignItems="center" gap={6}>
                     <Grid item xs={2}>
                       <p>Excellent</p>
@@ -382,9 +384,10 @@ export default function ProductDetails() {
                     </Grid>
                     <Grid item xs={7}>
                       <LinearProgress
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7, color:"yellow" }}
+                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
-                        value={25}                      
+                        value={25}
+                        color="warning"
                       />
                     </Grid>
                   </Grid>
@@ -419,6 +422,16 @@ export default function ProductDetails() {
                 </Box>
               </Grid>
             </Grid>
+          </div>
+        </section>
+
+        {/* similar product */}
+        <section className="pt-10">
+          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+          <div className="flex flex-wrap space-y-5">
+            {smartphones.map((item) => (
+              <HomeSectionCard product={item} />
+            ))}
           </div>
         </section>
       </div>
