@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author omind
- *
- */
-module helloworld {
-}
