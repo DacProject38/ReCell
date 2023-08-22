@@ -70,7 +70,7 @@ public class AuthController {
 		
 		AuthResponse authResponse =new AuthResponse();
 		authResponse.setJwt(token);
-		authResponse.setMessage("Signin Success");
+		authResponse.setMessage("SignUp Success");
 		
 		return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
 	}
@@ -90,7 +90,7 @@ public class AuthController {
 		
 		AuthResponse authResponse =new AuthResponse();
 		authResponse.setJwt(token);
-		authResponse.setMessage("Signup Success");
+		authResponse.setMessage("Signin Success");
 		
 		return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
     	
