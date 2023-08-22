@@ -73,7 +73,7 @@ public class Product {
 	
 	@ManyToOne()
 	@JoinColumn(name="catagory_id")
-	private Catagory catagory;
+	private Category category;
 	
 
 	private LocalDateTime createdAt;
@@ -88,7 +88,7 @@ public class Product {
 
 	public Product(Long id, String title, String description, int price, int discountPrice, int discountPercent,
 			int quantity, String brand, String color, Set<Storage> storage, String imageUrl, List<Rating> rating,
-			List<Review> reviews, int numRatings, Catagory catagory, LocalDateTime createdAt) {
+			List<Review> reviews, int numRatings, Category category, LocalDateTime createdAt) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -104,7 +104,7 @@ public class Product {
 		this.rating = rating;
 		this.reviews = reviews;
 		this.numRatings = numRatings;
-		this.catagory = catagory;
+		this.category = category;
 		this.createdAt = createdAt;
 	}
 
@@ -278,14 +278,14 @@ public class Product {
 
 
 
-	public Catagory getCatagory() {
-		return catagory;
+	public Category getCatagory() {
+		return category;
 	}
 
 
 
-	public void setCatagory(Catagory catagory) {
-		this.catagory = catagory;
+	public void setCatagory(Category category) {
+		this.category = category;
 	}
 
 
