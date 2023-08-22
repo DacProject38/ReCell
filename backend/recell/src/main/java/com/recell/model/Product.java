@@ -71,8 +71,8 @@ public class Product {
 	private int numRatings;
 	
 	
-	@ManyToOne()
-	@JoinColumn(name="catagory_id")
+	@ManyToOne
+	@JoinColumn(name="category_id")
 	private Category category;
 	
 
@@ -278,13 +278,13 @@ public class Product {
 
 
 
-	public Category getCatagory() {
+	public Category getCategory() {
 		return category;
 	}
 
 
 
-	public void setCatagory(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

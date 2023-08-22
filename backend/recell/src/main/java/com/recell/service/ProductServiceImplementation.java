@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 //import org.springframework.data.domain.PageRequest;
@@ -78,7 +79,7 @@ public class ProductServiceImplementation implements ProductService{
 		product.setPrice(req.getPrice());
 		product.setStorage(req.getStorage());
 		product.setQuantity(req.getQuantity());
-		product.setCatagory(thirdLevel);
+		product.setCategory(thirdLevel);
 		product.setCreatedAt(LocalDateTime.now());
 		
 		Product savedProduct=productRepository.save(product);
@@ -147,7 +148,13 @@ public class ProductServiceImplementation implements ProductService{
 		
 		int startIndex=(int) pageble.getOffset();
 		int endIndex=Math.min(startIndex+pageble.getPageSize(), products.size());
-		return null;
+		
+		List<Product> pageContent=products.subList(startIndex, endIndex);
+		
+		Page<Product> filterdProducts = new PageImpl<>(pageContent,pageble,products.size());
+		
+		return filterdProducts;
+
 	}
 
 }
