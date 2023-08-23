@@ -5,65 +5,80 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.recell.user.domain.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.util.ClassUtil.Ctor;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@Column(name = "first_name")
 	private String firstName;
-	
+
+	@Column(name = "last_name")
 	private String lastName;
-	
+
+	@Column(name = "password")
 	private String password;
-	
+
+	@Column(name = "email")
 	private String email;
-	
-	private String role;
-	
+
+	private UserRole role;
+
 	private String mobile;
-	
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Address> address=new ArrayList<>();
-	
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Address> addresses = new ArrayList<>();
+
 	@Embedded
-	@ElementCollection//for creating sapaerate table
-	@CollectionTable(name="payment_information",joinColumns=@JoinColumn(name="user_id"))
-	private List<PaymentInformation> paymentInformation=new ArrayList<>();
-	
-	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+	@ElementCollection
+	@CollectionTable(name = "payment_information", joinColumns = @JoinColumn(name = "user_id"))
+	private List<PaymentInformation> paymentInformation = new ArrayList<>();
+
 	@JsonIgnore
-	private List<Rating> rating=new ArrayList<>();
-	
-	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Rating> ratings = new ArrayList<>();
+
 	@JsonIgnore
-	private List<Review> reviews=new ArrayList<>();
-	
-	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Review> reviews = new ArrayList<>();
+
 	private LocalDateTime createdAt;
-	
+
 	public User() {
-		
+
 	}
 
-	public User(Long id, String firstName, String lastName, String password, String email, String role, String mobile,
-			List<Address> address, List<PaymentInformation> paymentInformation, List<Rating> rating,
+	public User(Long id, String firstName, String lastName, String password, String email, UserRole role, String mobile,
+			List<Address> addresses, List<PaymentInformation> paymentInformation, List<Rating> ratings,
 			List<Review> reviews, LocalDateTime createdAt) {
 		super();
 		this.id = id;
@@ -73,10 +88,34 @@ public class User {
 		this.email = email;
 		this.role = role;
 		this.mobile = mobile;
-		this.address = address;
+		this.addresses = addresses;
 		this.paymentInformation = paymentInformation;
-		this.rating = rating;
+		this.ratings = ratings;
 		this.reviews = reviews;
+		this.createdAt = createdAt;
+	}
+
+	public List<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -120,11 +159,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 
@@ -136,12 +175,12 @@ public class User {
 		this.mobile = mobile;
 	}
 
-	public List<Address> getAddress() {
-		return address;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(List<Address> address) {
-		this.address = address;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	public List<PaymentInformation> getPaymentInformation() {
@@ -151,31 +190,5 @@ public class User {
 	public void setPaymentInformation(List<PaymentInformation> paymentInformation) {
 		this.paymentInformation = paymentInformation;
 	}
-
-	public List<Rating> getRating() {
-		return rating;
-	}
-
-	public void setRating(List<Rating> rating) {
-		this.rating = rating;
-	}
-
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-	
-	
 
 }

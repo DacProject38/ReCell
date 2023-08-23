@@ -1,6 +1,7 @@
 package com.recell.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,6 +29,8 @@ public class OrderItem {
 	
 	private int quantity;
 	
+	private Integer price;
+	
 	private Integer discountedPrice;
 	
 	private Long userId;
@@ -35,19 +38,22 @@ public class OrderItem {
 	private LocalDateTime deliveryDate;
 	
 	public OrderItem() {
-		
+		// TODO Auto-generated constructor stub
 	}
 
-	public OrderItem(Long id, Order order, Product product, String size, int quantity, Integer discountedPrice,
-			Long userId, LocalDateTime deliveryDate) {
-		super();
-		this.id = id;
-		this.order = order;
-		this.product = product;
-		this.size = size;
-		this.quantity = quantity;
+	public Integer getDiscountedPrice() {
+		return discountedPrice;
+	}
+
+	public void setDiscountedPrice(Integer discountedPrice) {
 		this.discountedPrice = discountedPrice;
-		this.userId = userId;
+	}
+
+	public LocalDateTime getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(LocalDateTime deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -91,12 +97,12 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public Integer getDiscountedPrice() {
-		return discountedPrice;
+	public Integer getPrice() {
+		return price;
 	}
 
-	public void setDiscountedPrice(Integer discountedPrice) {
-		this.discountedPrice = discountedPrice;
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 	public Long getUserId() {
@@ -107,12 +113,23 @@ public class OrderItem {
 		this.userId = userId;
 	}
 
-	public LocalDateTime getDeliveryDate() {
-		return deliveryDate;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, order, price, product, quantity, size, userId);
 	}
 
-	public void setDeliveryDate(LocalDateTime deliveryDate) {
-		this.deliveryDate = deliveryDate;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderItem other = (OrderItem) obj;
+		return Objects.equals(id, other.id) && Objects.equals(order, other.order) && Objects.equals(price, other.price)
+				&& Objects.equals(product, other.product) && quantity == other.quantity
+				&& Objects.equals(size, other.size) && Objects.equals(userId, other.userId);
 	}
-	
+
 }

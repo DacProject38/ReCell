@@ -17,13 +17,13 @@ import com.recell.request.ReviewRequest;
 @Service
 public class ReviewServiceImplementation implements ReviewService {
 
-	
+	@Autowired
 	private ReviewRepository reviewRepository;
 
-	
+	@Autowired
 	private ProductService productService;
 
-	
+	@Autowired
 	private ProductRepository productRepository;
 
 	@Override
@@ -48,4 +48,5 @@ public class ReviewServiceImplementation implements ReviewService {
 	}
 
 }
+
 

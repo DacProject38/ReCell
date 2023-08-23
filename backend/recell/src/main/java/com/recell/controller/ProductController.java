@@ -2,6 +2,7 @@ package com.recell.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,11 @@ import com.recell.exception.ProductException;
 import com.recell.model.Product;
 import com.recell.service.ProductService;
 
-
-
-
 @RestController
 @RequestMapping("/api")
-
 public class ProductController {
-	
+
+	@Autowired
 	private ProductService productService;
 	
 	@GetMapping("/products")
@@ -32,10 +30,7 @@ public class ProductController {
 			@RequestParam String stock, @RequestParam Integer pageNumber,@RequestParam Integer pageSize){
 
 		
-		Page<Product> res= productService.getAllProduct(
-				category, color, size, minPrice, maxPrice, 
-				minDiscount, sort,stock,pageNumber,pageSize);
-		System.out.println("complete products");
+		Page<Product> res= productService.getAllProduct(category, color, size, minPrice, maxPrice, minDiscount, sort,stock,pageNumber,pageSize);
 		
 		return new ResponseEntity<>(res,HttpStatus.ACCEPTED);
 		
@@ -49,9 +44,5 @@ public class ProductController {
 		return new ResponseEntity<Product>(product,HttpStatus.ACCEPTED);
 	}
 
-	
 
-		
-	}
-
-
+}

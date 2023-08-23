@@ -1,18 +1,20 @@
 package com.recell.response;
 
+
 public class AuthResponse {
-	
+
 	private String jwt;
-	private String message;
-	
+
+	private boolean status;
+
 	public AuthResponse() {
-		
+
 	}
-	
-	public AuthResponse(String jwt, String message) {
+
+	public AuthResponse(String jwt, boolean status) {
 		super();
 		this.jwt = jwt;
-		this.message = message;
+		this.status = status;
 	}
 
 	public String getJwt() {
@@ -23,13 +25,11 @@ public class AuthResponse {
 		this.jwt = jwt;
 	}
 
-	public String getMessage() {
-		return message;
+	public boolean getStatus() {
+		return status;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
-	
-    
 }

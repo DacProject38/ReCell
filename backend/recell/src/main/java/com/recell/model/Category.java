@@ -7,42 +7,46 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name = "categories")
 public class Category {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@NotNull
-	@Size(max=50)
-	private String name;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="parent_category_id")
-	private Category parentCategory;
-	
-	
-	private int level;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public Category getParentCategory() {
-		return parentCategory;
-	}
+    @NotNull
+    @Size(max = 50)
+    private String name;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "parent_category_id")
+    private Category parentCategory;
 
-	public void setParentCategory(Category parentCategory) {
-		this.parentCategory = parentCategory;
+    private int level;
+    
+    
+	public Category() {
+		// TODO Auto-generated constructor stub
 	}
+	
+
+	
+
 
 	public int getLevel() {
 		return level;
 	}
 
+
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -59,21 +63,16 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public Category() {
-		
+
+	public Category getParentCategory() {
+		return parentCategory;
 	}
 
-	public Category(Long id, @NotNull @Size(max = 50) String name, Category parentCategory, int level) {
-		super();
-		this.id = id;
-		this.name = name;
+	public void setParentCategory(Category parentCategory) {
 		this.parentCategory = parentCategory;
-		this.level = level;
 	}
 
 	
-	
-	
+    
 
 }

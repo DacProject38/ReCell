@@ -14,48 +14,58 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+
 @Entity
 public class Cart {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	//one user can have one cart only
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable = false)
-	private User user;
-	
-	//one cart can have multiple items
-	//if we don't do mappedBy = "cart", it will create new table named "cart" to map
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-	@Column(name="cart_items")
-	private Set<CartItem> cartItems = new HashSet<>();
-	
-	@Column(name="total_price")
-	private double totalPrice;
-	
-	@Column(name="total_item")
-	private int totalItem;
-	
-	private int totalDiscountedPrice;
-	
-	private int discount;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "cart_items")
+    private Set<CartItem> cartItems = new HashSet<>();
+
+    @Column(name = "total_price")
+    private double totalPrice;
+    
+    @Column(name="total_item")
+    private int totalItem;
+    
+    private int totalDiscountedPrice;
+    
+    private int discounte;
+    
 	public Cart() {
-
+		// TODO Auto-generated constructor stub
 	}
 
-	public Cart(Long id, User user, Set<CartItem> cartItems, double totalPrice, int totalItem, int totalDiscountedPrice,
-			int discount) {
+	public Cart(Long id, User user, Set<CartItem> cartItems, double totalPrice, int totalItem) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.cartItems = cartItems;
 		this.totalPrice = totalPrice;
 		this.totalItem = totalItem;
+	}
+
+	public int getTotalDiscountedPrice() {
+		return totalDiscountedPrice;
+	}
+
+	public void setTotalDiscountedPrice(int totalDiscountedPrice) {
 		this.totalDiscountedPrice = totalDiscountedPrice;
-		this.discount = discount;
+	}
+	public int getDiscounte() {
+		return discounte;
+	}
+
+	public void setDiscounte(int discounte) {
+		this.discounte = discounte;
 	}
 
 	public Long getId() {
@@ -98,20 +108,4 @@ public class Cart {
 		this.totalItem = totalItem;
 	}
 
-	public int getTotalDiscountedPrice() {
-		return totalDiscountedPrice;
-	}
-
-	public void setTotalDiscountedPrice(int totalDiscountedPrice) {
-		this.totalDiscountedPrice = totalDiscountedPrice;
-	}
-
-	public int getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}	
-	
 }
