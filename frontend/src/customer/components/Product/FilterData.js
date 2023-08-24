@@ -1,50 +1,63 @@
 export const filters = [
-  {
-    id: "brand",
-    name: "Brand",
-    options: [
-      { value: "apple", label: "Apple" },
-      { value: "google", label: "Google" },
-      { value: "motorola", label: "Motorola" },
-      { value: "oneplus", label: "OnePlus" },
-      { value: "oppo", label: "Oppo" },
-      { value: "poco", label: "Poco" },
-      { value: "realme", label: "Realme" },
-      { value: "samsung", label: "Samsung" },
-    ],
-  },
-  {
-    id: "ram",
-    name: "RAM",
-    options: [
-      { value: "4gb", label: "4 GB" },
-      { value: "8gb", label: "8 GB" },
-      { value: "16gb", label: "16 GB" },
-    ],
-  },
+  // {
+  //   id: "brand",
+  //   name: "Brand",
+  //   options: [
+  //     { value: "apple", label: "Apple" },
+  //     { value: "google", label: "Google" },
+  //     { value: "motorola", label: "Motorola" },
+  //     { value: "oneplus", label: "OnePlus" },
+  //     { value: "oppo", label: "Oppo" },
+  //     { value: "poco", label: "Poco" },
+  //     { value: "realme", label: "Realme" },
+  //     { value: "samsung", label: "Samsung" },
+  //   ],
+  // },
+
+  // {
+  //   id: "ram",
+  //   name: "RAM",
+  //   options: [
+  //     { value: "4gb", label: "4 GB" },
+  //     { value: "8gb", label: "8 GB" },
+  //     { value: "16gb", label: "16 GB" },
+  //   ],
+  // },
+
+   {
+      id: "color",
+      name: "color",
+      options: [
+        { value: "blue", label: "Blue" },
+        { value: "red", label: "Red" },
+        { value: "white", label: "White" },
+        { value: "black", label: "Black" },
+        
+      ],
+    },
   {
     id: "size",
-    name: "size",
+    name: "Size",
     options: [
-      { value: "64gb", label: "64 GB" },
-      { value: "128gb", label: "128 GB" },
-      { value: "256gb", label: "256 GB" },
-      { value: "512gb", label: "512 GB" },
-      { value: "1tb", label: "1 TB" },
+      { value: "64", label: "64 GB" },
+      { value: "128", label: "128 GB" },
+      { value: "256", label: "256 GB" },
+      { value: "512", label: "512 GB" },
+      { value: "1024", label: "1 TB" },
     ],
   },
-  {
-    id: "battery",
-    name: "Battery Capacity",
-    options: [
-      { value: "3000mah", label: "3000 mAh" },
-      { value: "3500mah", label: "3500 mAh" },
-      { value: "4000mah", label: "4000 mAh" },
-      { value: "4500mah", label: "4500 mAh" },
-      { value: "5000mah", label: "5000 mAh" },
-      { value: "6000mah", label: "6000 mAh" },
-    ],
-  },
+  // {
+  //   id: "battery",
+  //   name: "Battery Capacity",
+  //   options: [
+  //     { value: "3000mah", label: "3000 mAh" },
+  //     { value: "3500mah", label: "3500 mAh" },
+  //     { value: "4000mah", label: "4000 mAh" },
+  //     { value: "4500mah", label: "4500 mAh" },
+  //     { value: "5000mah", label: "5000 mAh" },
+  //     { value: "6000mah", label: "6000 mAh" },
+  //   ],
+  // },
 ];
 
 export const singleFilter = [
