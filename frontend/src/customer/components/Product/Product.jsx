@@ -90,7 +90,7 @@ export default function Product() {
     const data={
       category:param.lavelThree,
       colors:colorValue || [],
-      sizes:sizeValue | [],
+      sizes:sizeValue || [],
       minPrice,
       maxPrice,
       minDiscount:discount || 0,
