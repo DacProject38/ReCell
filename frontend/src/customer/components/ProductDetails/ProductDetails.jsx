@@ -38,7 +38,7 @@ const product = {
     { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
     { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
   ],
-  storages: [
+  sizes: [
     // { name: '4 GB / 512 GB', inStock: false },
     { name: "4 GB / 256 GB", inStock: true },
     { name: "4 GB / 128 GB", inStock: true },
@@ -47,7 +47,7 @@ const product = {
   description:
     "Refurbished phones come in 4 variants - Open Box, Superb, Good, Fair. Still puzzled? Check out explanatory videos to learn more.",
   highlights: [
-    "Screen storage: 6.1 inches",
+    "Screen size: 6.1 inches",
     "Battery Capacity: 3110 mAh",
     "Chipset: Apple A13 Bionic",
     "Pixel Density: 324 ppi",
@@ -65,7 +65,7 @@ function classNames(...classes) {
 
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedstorage, setSelectedstorage] = useState(product.storages[2]);
+  const [selectedsize, setSelectedsize] = useState(product.sizes[2]);
   const navigate=useNavigate();
 
   const handleAddToCart = () =>{
@@ -208,34 +208,34 @@ export default function ProductDetails() {
                   </RadioGroup>
                 </div>
 
-                {/* storages */}
+                {/* sizes */}
                 <div className="mt-10">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-medium text-gray-900">
-                      Storage
+                      size
                     </h3>
                     {/* <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                    storage guide
+                    size guide
                   </a> */}
                   </div>
 
                   <RadioGroup
-                    value={selectedstorage}
-                    onChange={setSelectedstorage}
+                    value={selectedsize}
+                    onChange={setSelectedsize}
                     className="mt-4"
                   >
                     <RadioGroup.Label className="sr-only">
-                      Choose a storage
+                      Choose a size
                     </RadioGroup.Label>
                     <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                      {product.storages.map((storage) => (
+                      {product.sizes.map((size) => (
                         <RadioGroup.Option
-                          key={storage.name}
-                          value={storage}
-                          disabled={!storage.inStock}
+                          key={size.name}
+                          value={size}
+                          disabled={!size.inStock}
                           className={({ active }) =>
                             classNames(
-                              storage.inStock
+                              size.inStock
                                 ? "cursor-pointer bg-white text-gray-900 shadow-sm"
                                 : "cursor-not-allowed bg-gray-50 text-gray-200",
                               active ? "ring-2 ring-indigo-500" : "",
@@ -246,9 +246,9 @@ export default function ProductDetails() {
                           {({ active, checked }) => (
                             <>
                               <RadioGroup.Label as="span">
-                                {storage.name}
+                                {size.name}
                               </RadioGroup.Label>
-                              {storage.inStock ? (
+                              {size.inStock ? (
                                 <span
                                   className={classNames(
                                     active ? "border" : "border-2",

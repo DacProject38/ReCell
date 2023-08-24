@@ -23,8 +23,8 @@ export const filters = [
     ],
   },
   {
-    id: "storage",
-    name: "Storage",
+    id: "size",
+    name: "size",
     options: [
       { value: "64gb", label: "64 GB" },
       { value: "128gb", label: "128 GB" },
