@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import { smartphones } from "../../../Data/smartphones";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { findProductsById } from "../../../State/Product/Action";
 
 const product = {
   name: "Apple iPhone 11 - Refurbished",
@@ -64,13 +66,22 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedsize, setSelectedsize] = useState(product.sizes[2]);
+  const [selectedsize, setSelectedsize] = useState("");
+  // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const navigate=useNavigate();
+  const params=useParams();
+  const dispatch=useDispatch();
+  const {products}=useSelector(store=>store);
 
   const handleAddToCart = () =>{
     navigate("/cart")
   }
+
+  console.log(products.products)
+  useEffect(()=>{
+    const data={productId:params.productId}
+    dispatch(findProductsById(data))
+  },[params.productId])
 
   return (
     <div className="bg-white lg:px-20">
@@ -118,7 +129,7 @@ export default function ProductDetails() {
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
               <img
-                src={product.images[0].src}
+                src={products.products?.imageUrl}
                 alt={product.images[0].alt}
                 className="h-full w-full object-cover object-center"
               />
@@ -140,7 +151,11 @@ export default function ProductDetails() {
           <div className="lg:col-span-1 maxt-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
             <div className="lg:col-span-2 ">
               <h1 className="text-lg lg:text-xl font-semibold text-gray-900">
-                {product.name}
+                {" "}
+                {products.products?.brand}
+              </h1>
+              <h1 className="text-lg lg:text-xl text-grey-900 opacity-60 pt-1">
+                {products.products?.title}
               </h1>
             </div>
 
@@ -149,9 +164,12 @@ export default function ProductDetails() {
               <h2 className="sr-only">Product information</h2>
               {/* <p className="text-3xl tracking-tight text-gray-900">{product.price}</p> */}
               <div className="flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6">
-                <p className="font-semibold">₹32,399</p>
-                <p className="opacity-50 line-through">₹64,900</p>
-                <p className="text-green-600 font-semibold">50% Off</p>
+                <p className="font-semibold">{products.products?.discountedPrice}</p>
+             
+                <p className="opacity-50 line-through">{products.products?.price}</p>
+     
+                <p className="text-green-600 font-semibold">{products.products?.discountPersent}% Off</p>
+                <console className="log">{products.product?.discountPersent}</console>
               </div>
 
               {/* Reviews */}
@@ -167,7 +185,7 @@ export default function ProductDetails() {
 
               <form className="mt-10">
                 {/* Colors */}
-                <div>
+                {/* <div>
                   <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
                   <RadioGroup
@@ -206,7 +224,7 @@ export default function ProductDetails() {
                       ))}
                     </div>
                   </RadioGroup>
-                </div>
+                </div> */}
 
                 {/* sizes */}
                 <div className="mt-10">

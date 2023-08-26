@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -16,11 +16,17 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  Pagination,
   Radio,
   RadioGroup,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { findProducts } from "../../../State/Product/Action";
 
 const sortOptions = [
@@ -36,19 +42,27 @@ export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const param=useParams();
-  const dispatch=useDispatch();
+  const param = useParams();
+  const dispatch = useDispatch();
+  const {product}=useSelector(store=>store)
 
-  const decodedQueryString=decodeURIComponent(location.search);
-  const searchParams=new URLSearchParams(decodedQueryString);
-  const colorValue=searchParams.get("color");
-  const sizeValue=searchParams.get("size");
-  const priceValue=searchParams.get("price"); 
-  const discount=searchParams.get("discount");
-  const sortValue=searchParams.get("sort");
-  
-  const pageNumber=searchParams.get("page") || 1;
-  const stock=searchParams.get("stock");
+  const decodedQueryString = decodeURIComponent(location.search);
+  const searchParams = new URLSearchParams(decodedQueryString);
+  const colorValue = searchParams.get("color");
+  const sizeValue = searchParams.get("size");
+  const priceValue = searchParams.get("price");
+  const discount = searchParams.get("discount");
+  const sortValue = searchParams.get("sort");
+
+  const pageNumber = searchParams.get("page") || 1;
+  const stock = searchParams.get("stock");
+
+  const handlePaginationChange=(event,value)=>{
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("page",value);
+    const query=searchParams.toString();
+    navigate({search:`?${query}`})
+  }
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
@@ -83,33 +97,33 @@ export default function Product() {
     navigate({ search: `?${query}` });
   };
 
+  useEffect(() => {
+    const [minPrice, maxPrice] =
+      priceValue === null ? [0, 50000] : priceValue.split("-").map(Number);
 
-  useEffect(()=>{
-    const [minPrice, maxPrice]=priceValue===null?[0,50000]:priceValue.split("-").map(Number);
-
-    const data={
-      category:param.lavelThree,
-      colors:colorValue || [],
-      sizes:sizeValue || [],
+    const data = {
+      category: param.lavelThree,
+      colors: colorValue || [],
+      sizes: sizeValue || [],
       minPrice,
       maxPrice,
-      minDiscount:discount || 0,
-      sort:sortValue || "price_low",
-      pageNumber:pageNumber - 1,
-      pageSize:10,
-      stock:stock
-    }
-    dispatch(findProducts(data))
-
-  },[param.lavelThree,
+      minDiscount: discount || 0,
+      sort: sortValue || "price_low",
+      pageNumber: pageNumber - 1,
+      pageSize: 1,
+      stock: stock,
+    };
+    dispatch(findProducts(data));
+  }, [
+    param.lavelThree,
     colorValue,
     sizeValue,
     priceValue,
     discount,
     sortValue,
     pageNumber,
-    stock
-  ])
+    stock,
+  ]);
 
   return (
     <div className="bg-white">
@@ -434,11 +448,17 @@ export default function Product() {
               {/* Product grid */}
               <div className="lg:col-span-5 w-full">
                 <div className="flex flex-wrap justify-center bg-white py-5">
-                  {smartphones.map((item) => (
+                  {product.products && product.products?.content?.map((item) => (
                     <ProductCard product={item} />
                   ))}
                 </div>
               </div>
+            </div>
+          </section>
+          <section className="w-full px[3.6rem]">
+            <div className="px-4 py-5 flex justify-center">
+              <Pagination count={product.products?.totalPages} color="secondary" 
+              onChange={handlePaginationChange} />
             </div>
           </section>
         </main>
