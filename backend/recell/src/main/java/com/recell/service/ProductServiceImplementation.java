@@ -155,7 +155,7 @@ public class ProductServiceImplementation implements ProductService {
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
 		List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, minDiscount, sort);
-
+//		System.out.println(products.get(0));
 		if (!colors.isEmpty()) {
 			products = products.stream().filter(p -> colors.stream().anyMatch(c -> c.equalsIgnoreCase(p.getColor())))
 					.collect(Collectors.toList());
@@ -175,6 +175,7 @@ public class ProductServiceImplementation implements ProductService {
 		int endIndex = Math.min(startIndex + pageable.getPageSize(), products.size());
 
 		List<Product> pageContent = products.subList(startIndex, endIndex);
+//		System.out.println(pageContent.get(0));
 		Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable, products.size());
 		return filteredProducts; // If color list is empty, do nothing and return all products
 

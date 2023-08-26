@@ -85,7 +85,7 @@ export default function Product() {
 
 
   useEffect(()=>{
-    const [minPrice, maxPrice]=priceValue===null?[0,10000]:priceValue.split("-").map(Number);
+    const [minPrice, maxPrice]=priceValue===null?[0,50000]:priceValue.split("-").map(Number);
 
     const data={
       category:param.lavelThree,
