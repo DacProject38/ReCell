@@ -168,8 +168,8 @@ export default function ProductDetails() {
               <h2 className="sr-only">Product information</h2>
               {/* <p className="text-3xl tracking-tight text-gray-900">{product.price}</p> */}
               <div className="flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6">
-                <p className="font-semibold">{products.products?.discountedPrice}</p>
-                <p className="opacity-50 line-through">{products.products?.price}</p>
+                <p className="font-semibold">₹{products.products?.discountedPrice}</p>
+                <p className="opacity-50 line-through">₹{products.products?.price}</p>
                 <p className="text-green-600 font-semibold">{products.products?.discountPersent}% Off</p>
               </div>
 
