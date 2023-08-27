@@ -2,9 +2,11 @@ import React from "react";
 import CartItem from "./CardItem";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Cart = () => {
   const navigate=useNavigate();
+  const dispatch=useDispatch()
   const handleCheckout=()=>{
     navigate("/checkout?step=2")
   }

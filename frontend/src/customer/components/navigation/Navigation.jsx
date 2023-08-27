@@ -247,11 +247,11 @@ export default function Navigation() {
                       Sign in
                     </a>
                   </div>
-                  <div className="flow-root">
+                  {/* <div className="flow-root">
                     <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
                       Create account
                     </a>
-                  </div>
+                  </div> */}
                 </div>
 
                 
@@ -454,14 +454,14 @@ export default function Navigation() {
                       onClick={handleOpen}
                       className='text-sm font-medium text-gray-700 hover:text-gray-800'
                     >
-                      Signin
+                      Login / Register
                     </Button>
                   )}
 
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                  {/* <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
-                  </a>
+                  </a> */}
                 </div>
 
                 
