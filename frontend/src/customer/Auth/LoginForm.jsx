@@ -28,6 +28,7 @@ console.log("userData", userData)
                 <Grid item xs={12}>
                     <TextField
                     required
+                    type='email'
                     id='email'
                     name='email'
                     label='Email'
@@ -38,6 +39,7 @@ console.log("userData", userData)
                 <Grid item xs={12}>
                     <TextField
                     required
+                    type='password'
                     id='password'
                     name='password'
                     label='Password'

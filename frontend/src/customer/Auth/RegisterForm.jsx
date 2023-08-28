@@ -60,6 +60,7 @@ const RegisterForm = () => {
                 <Grid item xs={12}>
                     <TextField
                     required
+                    type='email'
                     id='email'
                     name='email'
                     label='Email'
@@ -69,6 +70,7 @@ const RegisterForm = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
+                    type='password'
                     required
                     id='password'
                     name='password'
