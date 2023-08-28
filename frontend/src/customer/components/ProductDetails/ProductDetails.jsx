@@ -10,56 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { findProductsById } from "../../../State/Product/Action";
 import { addItemToCart } from "../../../State/Cart/Action";
 
-const product = {
-  name: "Apple iPhone 11 - Refurbished",
-  price: "₹25,899",
-  href: "#",
-  breadcrumbs: [
-    { id: 1, name: "SmartPhone", href: "#" },
-    { id: 2, name: "Apple", href: "#" },
-  ],
-  images: [
-    {
-      src: "https://s3no.cashify.in/cashify/product/img/xxhdpi/d8394bf8-e922.jpg?p=es5sq&s=es",
-      alt: "front view of Apple iPhone 11 - Refurbished",
-    },
-    {
-      src: "https://s3no.cashify.in/pd-admin/0b5eab069de84b6f8c9690f8203da29b.jpg?p=es5sq&s=es",
-      alt: "back view of Apple iPhone 11 - Refurbished",
-    },
-    {
-      src: "https://s3no.cashify.in/pd-admin/4abac3b8d85a4d269349ae39703740a3.jpg?p=es5sq&s=es",
-      alt: "side view of Apple iPhone 11 - Refurbished",
-    },
-    {
-      src: "https://s3n.cashify.in/estore/49851143209a406fa10bfd29878e24d1.png",
-      alt: "Details about Apple iPhone 11 - Refurbished",
-    },
-  ],
-  colors: [
-    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-  ],
-  sizes: [
-    // { name: '4 GB / 512 GB', inStock: false },
-    { name: "4 GB / 256 GB", inStock: true },
-    { name: "4 GB / 128 GB", inStock: true },
-    { name: "4 GB / 64 GB", inStock: true },
-  ],
-  description:
-    "Refurbished phones come in 4 variants - Open Box, Superb, Good, Fair. Still puzzled? Check out explanatory videos to learn more.",
-  highlights: [
-    "Screen size: 6.1 inches",
-    "Battery Capacity: 3110 mAh",
-    "Chipset: Apple A13 Bionic",
-    "Pixel Density: 324 ppi",
-    "Network Support: 4G",
-    "SIM Slot(s): Dual SIM, GSM+GSM",
-  ],
-  details:
-    "Apple iPhone 11 is powered by the Apple A13 Bionic processor. The smartphone comes with a 6.1 inches Liquid Retina IPS LCD capacitive touchscreen and 828 x 1792 pixels resolution. The screen of the device is protected by Scratch-resistant glass and oleophobic coating.The rear camera consists of a 12 MP (wide) + 12 MP (ultrawide) lenses. The front camera has a 12 MP + TOF 3D camera sensor. The phone’s sensors include Face ID, accelerometer, gyro, proximity, compass, and barometer. The smartphone is fueled by a Non-removable Li-Ion 3110 mAh battery + Fast battery charging 18W: 50% in 30 min + USB Power Delivery 2.0 + Qi wireless charging. The phone runs on iOS 13. The Apple iPhone 11 comes in different colors like, Black, Green, Yellow, Purple, Red, and White. It features 2.0, proprietary reversible connector.",
-};
+
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
@@ -76,12 +27,52 @@ export default function ProductDetails() {
 
   const handleAddToCart = () =>{
     const data={productId:params.productId,size:selectedsize.name}
-    console.log("data__",data)
+    //console.log("data__wsjaks",data)
     dispatch(addItemToCart(data))
     navigate("/cart")
   }
 
-  console.log(products.products)
+  const product = {
+   
+    price: "₹25,899",
+    href: "#",
+    breadcrumbs: [
+      { id: 1, name: "BuyPhone", href: "#" },
+      { id: 2, name: "SmartPhone", href: "#" },
+    ],
+    images: [
+      
+      {
+        src: "https://s3n.cashify.in/estore/49851143209a406fa10bfd29878e24d1.png",
+        alt: "Details about Apple iPhone 11 - Refurbished",
+      },
+    ],
+    colors: [
+      { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
+      { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
+      { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
+    ],
+    sizes: [
+      // { name: '4 GB / 512 GB', inStock: false },
+      { name: "6 GB / 256 GB", inStock: true },
+      { name: "4 GB / 128 GB", inStock: true },
+      { name: "4 GB / 64 GB", inStock: true },
+    ],
+    description:
+      "Refurbished phones come in 4 variants - Open Box, Superb, Good, Fair. Still puzzled? Check out explanatory videos to learn more.",
+    highlights: [
+      "Screen size: 6.1 inches",
+      "Battery Capacity: 3110 mAh",
+      "Chipset: Apple A13 Bionic",
+      "Pixel Density: 324 ppi",
+      "Network Support: 4G",
+      "SIM Slot(s): Dual SIM, GSM+GSM",
+    ],
+    details:
+      "Apple iPhone 11 is powered by the Apple A13 Bionic processor. The smartphone comes with a 6.1 inches Liquid Retina IPS LCD capacitive touchscreen and 828 x 1792 pixels resolution. The screen of the device is protected by Scratch-resistant glass and oleophobic coating.The rear camera consists of a 12 MP (wide) + 12 MP (ultrawide) lenses. The front camera has a 12 MP + TOF 3D camera sensor. The phone’s sensors include Face ID, accelerometer, gyro, proximity, compass, and barometer. The smartphone is fueled by a Non-removable Li-Ion 3110 mAh battery + Fast battery charging 18W: 50% in 30 min + USB Power Delivery 2.0 + Qi wireless charging. The phone runs on iOS 13. The Apple iPhone 11 comes in different colors like, Black, Green, Yellow, Purple, Red, and White. It features 2.0, proprietary reversible connector.",
+  };
+
+  //console.log("akash"+products.products)
   useEffect(()=>{
     const data={productId:params.productId}
     dispatch(findProductsById(data))
@@ -323,7 +314,7 @@ export default function ProductDetails() {
 
                 <div className="space-y-6">
                   <p className="text-base text-gray-900">
-                    {product.description}
+                    {products.products?.description}
                   </p>
                 </div>
               </div>
@@ -348,7 +339,7 @@ export default function ProductDetails() {
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
                 <div className="mt-4 space-y-6">
-                  <p className="text-sm text-gray-600">{product.details}</p>
+                  <p className="text-sm text-gray-600">{products.products?.description}</p>
                 </div>
               </div>
             </div>

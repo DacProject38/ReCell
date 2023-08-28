@@ -17,12 +17,16 @@ export const createOrder=(reqData) => async (dispatch) => {
     dispatch({type: CREATE_ORDER_REQUEST });
     try{
         
-
+        console.log("in try of create order")
         const { data } = await api.post(
-            `/api/orders`, reqData.address,   
+            `/api/orders/`,
+             reqData.address,   
+             console.log("in the post method")
 
         );
+       
         if(data.id){
+           
             reqData.navigate({ search: `step=3&order_id=${data.id}`});
         }
 

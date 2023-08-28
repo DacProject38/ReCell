@@ -27,6 +27,8 @@ const DeliveryAddressForm = () => {
         mobile:data.get("phoneNumber"),
     }
 
+    //console.log("firstmane is"+address.firstName);
+
     
 
     const orderData={address,navigate}

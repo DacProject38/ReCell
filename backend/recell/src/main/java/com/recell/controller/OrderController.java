@@ -34,7 +34,7 @@ public class OrderController {
 	@PostMapping("/")
 	public ResponseEntity<Order> createOrderHandler(@RequestBody Address spippingAddress,
 			@RequestHeader("Authorization") String jwt) throws UserException {
-
+        System.out.println("in api order");
 		User user = userService.findUserProfileByJwt(jwt);
 		Order order = orderService.createOrder(user, spippingAddress);
 
