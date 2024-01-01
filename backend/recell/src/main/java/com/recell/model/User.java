@@ -28,8 +28,6 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "users")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
